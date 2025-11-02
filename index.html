@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Dhaka College Cultural Club</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              'dc-blue': '#1E40AF', // A brighter blue for the light theme
+              'dc-gold': '#F59E0B', // A vibrant gold
+              'dc-dark': '#111827', // For primary text
+              'dc-light': '#F9FAFB', // Lightest gray for backgrounds
+              'dc-gray': '#E5E7EB', // Borders and dividers
+              'dc-text': '#374151', // Secondary text
+            },
+            fontFamily: {
+              sans: ['Inter', 'sans-serif'],
+              poppins: ['Poppins', 'sans-serif'],
+            },
+            animation: {
+                fadeInUp: 'fadeInUp 0.8s ease-out forwards',
+                fadeIn: 'fadeIn 1s ease-out forwards',
+            },
+            keyframes: {
+                fadeInUp: {
+                    '0%': { opacity: '0', transform: 'translateY(20px)' },
+                    '100%': { opacity: '1', transform: 'translateY(0)' },
+                },
+                fadeIn: {
+                    '0%': { opacity: '0' },
+                    '100%': { opacity: '1' },
+                },
+            },
+            boxShadow: {
+              'subtle': '0 4px 6px -1px rgb(0 0 0 / 0.05), 0 2px 4px -2px rgb(0 0 0 / 0.05)',
+              'medium': '0 10px 15px -3px rgb(0 0 0 / 0.07), 0 4px 6px -4px rgb(0 0 0 / 0.07)',
+            }
+          },
+        },
+      }
+    </script>
+    <style>
+      html {
+        scroll-behavior: smooth;
+      }
+      ::-webkit-scrollbar {
+        width: 8px;
+      }
+      ::-webkit-scrollbar-track {
+        background: #F1F5F9;
+      }
+      ::-webkit-scrollbar-thumb {
+        background: #94A3B8;
+        border-radius: 4px;
+      }
+      ::-webkit-scrollbar-thumb:hover {
+        background: #64748B;
+      }
+    </style>
+  <script type="importmap">
+{
+  "imports": {
+    "react-dom/": "https://aistudiocdn.com/react-dom@^19.2.0/",
+    "react/": "https://aistudiocdn.com/react@^19.2.0/",
+    "react": "https://aistudiocdn.com/react@^19.2.0",
+    "firebase/app": "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js",
+    "firebase/database": "https://www.gstatic.com/firebasejs/10.12.2/firebase-database.js",
+    "firebase/auth": "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js",
+    "firebase/": "https://aistudiocdn.com/firebase@^12.5.0/"
+  }
+}
+</script>
+</head>
+  <body>
+    <div id="root"></div>
+  </body>
+</html>

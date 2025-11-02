@@ -1,0 +1,52 @@
+{
+  "advisors": {
+    "0": { "name": "Dr. Aminul Islam", "designation": "Principal, Dhaka College", "photoUrl": "https://picsum.photos/seed/advisor1/400/400" },
+    "1": { "name": "Prof. Hasina Ahmed", "designation": "Head of Bengali Department", "photoUrl": "https://picsum.photos/seed/advisor2/400/400" }
+  },
+  "committees": {
+    "2024": {
+      "0": { "name": "Karim Ahmed", "role": "President", "photoUrl": "https://picsum.photos/seed/mem1/400/400", "socials": { "linkedin": "#", "facebook": "#" } },
+      "1": { "name": "Fatima Chowdhury", "role": "Vice President", "photoUrl": "https://picsum.photos/seed/mem2/400/400", "socials": { "linkedin": "#", "facebook": "#" } },
+      "2": { "name": "Rahim Sheikh", "role": "General Secretary", "photoUrl": "https://picsum.photos/seed/mem3/400/400", "socials": { "linkedin": "#", "facebook": "#" } },
+      "3": { "name": "Sultana Begum", "role": "Treasurer", "photoUrl": "https://picsum.photos/seed/mem4/400/400", "socials": { "linkedin": "#", "facebook": "#" } },
+      "4": { "name": "Jamal Uddin", "role": "Organizing Secretary", "photoUrl": "https://picsum.photos/seed/mem5/400/400", "socials": { "linkedin": "#", "facebook": "#" } },
+      "5": { "name": "Ayesha Khan", "role": "Head of Drama", "photoUrl": "https://picsum.photos/seed/mem6/400/400", "socials": { "linkedin": "#", "facebook": "#" } },
+      "6": { "name": "Imran Hossain", "role": "Head of Music", "photoUrl": "https://picsum.photos/seed/mem7/400/400", "socials": { "linkedin": "#", "facebook": "#" } },
+      "7": { "name": "Nusrat Jahan", "role": "Head of Literature", "photoUrl": "https://picsum.photos/seed/mem8/400/400", "socials": { "linkedin": "#", "facebook": "#" } }
+    },
+    "2023": {
+      "0": { "name": "Previous President", "role": "President", "photoUrl": "https://picsum.photos/seed/p_mem1/400/400", "socials": { "linkedin": "#", "facebook": "#" } },
+      "1": { "name": "Previous VP", "role": "Vice President", "photoUrl": "https://picsum.photos/seed/p_mem2/400/400", "socials": { "linkedin": "#", "facebook": "#" } }
+    }
+  },
+  "events": {
+    "0": { "id": 1, "title": "Annual Cultural Fest 2024", "date": "25 DEC 2024", "venue": "Dhaka College Auditorium", "description": "Our flagship event showcasing a vibrant mix of music, dance, drama, and art.", "imageUrl": "https://picsum.photos/seed/event1/800/600", "category": "Festival", "status": "upcoming" },
+    "1": { "id": 2, "title": "Inter-College Debate Championship", "date": "15 NOV 2024", "venue": "Main Seminar Hall", "description": "Witness the clash of words and wits as top debaters from various colleges compete.", "imageUrl": "https://picsum.photos/seed/event2/800/600", "category": "Debate", "status": "upcoming" },
+    "2": { "id": 3, "title": "Photography Workshop", "date": "05 OCT 2024", "venue": "Room 301, Academic Building", "description": "Learn the basics of photography from industry professionals.", "imageUrl": "https://picsum.photos/seed/event3/800/600", "category": "Workshop", "status": "upcoming" },
+    "3": { "id": 4, "title": "Spring Music Concert", "date": "14 APR 2024", "venue": "College Field", "description": "An evening of melodious tunes celebrating the arrival of spring.", "imageUrl": "https://picsum.photos/seed/event4/800/600", "category": "Music", "status": "past" },
+    "4": { "id": 5, "title": "Annual Drama Production: \"The Legacy\"", "date": "20 MAR 2024", "venue": "Dhaka College Auditorium", "description": "Our talented drama team presented a captivating story of history and heritage.", "imageUrl": "https://picsum.photos/seed/event5/800/600", "category": "Drama", "status": "past" },
+    "5": { "id": 6, "title": "Poetry Night", "date": "21 FEB 2024", "venue": "College Cafeteria", "description": "An intimate evening of poetic recitations and literary discussions.", "imageUrl": "https://picsum.photos/seed/event6/800/600", "category": "Workshop", "status": "past" }
+  },
+  "publications": {
+    "0": { "id": 1, "title": "The Cultural Canvas: Vol 1", "author": "DCCC Team", "category": "Literature", "imageUrl": "https://picsum.photos/seed/pub1/600/400", "excerpt": "Our inaugural digital magazine featuring creative works from our talented members.", "isFeatured": true },
+    "1": { "id": 2, "title": "Echoes of Tradition", "author": "Nusrat Jahan", "category": "Culture", "imageUrl": "https://picsum.photos/seed/pub2/600/400", "excerpt": "An exploration of traditional Bangladeshi folk arts and their modern relevance." },
+    "2": { "id": 3, "title": "The Art of Storytelling", "author": "Ayesha Khan", "category": "Opinion", "imageUrl": "https://picsum.photos/seed/pub3/600/400", "excerpt": "A deep dive into the power of narrative in drama and performance." },
+    "3": { "id": 4, "title": "Melodies of the Mind", "author": "Imran Hossain", "category": "Culture", "imageUrl": "https://picsum.photos/seed/pub4/600/400", "excerpt": "How music shapes our identity and cultural landscape." }
+  },
+  "galleryItems": {
+    "0": { "id": 1, "title": "Vibrant Stage Performance", "event": "Annual Cultural Fest 2024", "year": 2024, "type": "photo", "url": "https://picsum.photos/seed/gallery1/800/600" },
+    "1": { "id": 2, "title": "Debate Highlights", "event": "Inter-College Debate Championship", "year": 2024, "type": "video", "url": "https://www.youtube.com/embed/dQw4w9WgXcQ?si=example" },
+    "2": { "id": 3, "title": "Concert Moments", "event": "Spring Music Concert", "year": 2024, "type": "photo", "url": "https://picsum.photos/seed/gallery2/800/600" },
+    "3": { "id": 4, "title": "Drama Night Snippet", "event": "Annual Drama Production: \"The Legacy\"", "year": 2024, "type": "video", "url": "https://www.youtube.com/embed/dQw4w9WgXcQ?si=example" },
+    "4": { "id": 5, "title": "Candid Shot", "event": "Poetry Night", "year": 2024, "type": "photo", "url": "https://picsum.photos/seed/gallery3/800/600" },
+    "5": { "id": 6, "title": "Fest 2023 Throwback", "event": "Annual Cultural Fest 2023", "year": 2023, "type": "photo", "url": "https://picsum.photos/seed/gallery4/800/600" },
+    "6": { "id": 7, "title": "Workshop in Action", "event": "Photography Workshop", "year": 2023, "type": "photo", "url": "https://picsum.photos/seed/gallery5/800/600" },
+    "7": { "id": 8, "title": "Old Memories", "event": "Event from 2022", "year": 2022, "type": "video", "url": "https://www.youtube.com/embed/dQw4w9WgXcQ?si=example" }
+  },
+  "partners": {
+    "0": { "name": "Dhaka College Administration", "description": "Our parent institution providing invaluable guidance and support.", "logoUrl": "https://res.cloudinary.com/dabfeqgsj/image/upload/v1759778648/cyizstrjgcq0w9fr8cxp.png", "type": "institutional" },
+    "1": { "name": "Prothom Alo", "description": "Leading national daily, helping us reach a wider audience.", "logoUrl": "https://picsum.photos/seed/partner1/200/100", "type": "media" },
+    "2": { "name": "ACI Limited", "description": "Generous sponsor for our annual cultural festival.", "logoUrl": "https://picsum.photos/seed/partner2/200/100", "type": "sponsor" },
+    "3": { "name": "Channel i", "description": "Broadcasting our major events to the nation.", "logoUrl": "https://picsum.photos/seed/partner3/200/100", "type": "media" }
+  }
+}
