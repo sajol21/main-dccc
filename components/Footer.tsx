@@ -18,7 +18,7 @@ const Footer: React.FC<FooterProps> = ({navigateTo}) => {
         <div className="flex flex-col md:flex-row justify-between items-center text-center md:text-left">
             <div className="mb-6 md:mb-0">
                 <a href="#home" onClick={(e) => {e.preventDefault(); navigateTo(Page.Home)}} className="flex items-center justify-center md:justify-start space-x-3 mb-2">
-                    <img src="https://res.cloudinary.com/dabfeqgsj/image/upload/v1759778648/cyizstrjgcq0w9fr8cxp.png" alt="Logo" className="h-9"/>
+                    <img src="/logo.svg" alt="Logo" className="h-9"/>
                     <span className="font-bold text-xl">DCCC</span>
                 </a>
                 <p className="text-sm text-dc-text">Art. Unity. Legacy.</p>

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Page, Event, Member } from '../types';
-import { fetchDataAsArray, fetchDataAsObject } from '../services/dataService';
+import { fetchDataAsArray, fetchAndGroupCommitteesByYear } from '../services/dataService';
 
 // --- Reusable Section Component ---
 const Section: React.FC<{ children: React.ReactNode; className?: string; id?: string }> = ({ children, className = '', id }) => {
@@ -71,13 +71,12 @@ const HomePage: React.FC<{ navigateTo: (page: Page) => void }> = ({ navigateTo }
     const loadData = async () => {
       try {
         const eventsData = await fetchDataAsArray<Event>('events');
-        const committeesData = await fetchDataAsObject<{ [year: string]: { [key: string]: Member } }>('committees');
+        const committeesData = await fetchAndGroupCommitteesByYear();
         
         setEvents(eventsData.filter(e => e.status === 'upcoming').slice(0, 3));
 
         if (committeesData && committeesData['2024']) {
-          const committee2024 = Object.values(committeesData['2024']);
-          setLeadership(committee2024.slice(0, 3));
+          setLeadership(committeesData['2024'].slice(0, 3));
         }
       } catch (err) {
         console.error("Failed to load homepage data:", err);
@@ -159,7 +158,7 @@ const HomePage: React.FC<{ navigateTo: (page: Page) => void }> = ({ navigateTo }
                 Meet the Full Team
             </a>
         </div>
-      </Section>
+      </section>
     </div>
   );
 };

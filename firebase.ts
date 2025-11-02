@@ -1,12 +1,12 @@
 import { initializeApp } from "firebase/app";
-import { getDatabase } from "firebase/database";
 import { getAuth } from "firebase/auth";
+import { getFirestore } from "firebase/firestore";
 
 // Your web app's Firebase configuration, provided by you.
 const firebaseConfig = {
     apiKey: "AIzaSyDpLCk3uxRRXfNMfaYhXERedpUNLQSBRa0",
     authDomain: "dccc-main.firebaseapp.com",
-    databaseURL: "https://dccc-main-default-rtdb.firebaseio.com", // Corrected based on Firebase warning to point to the correct DB region.
+    databaseURL: "https://dccc-main-default-rtdb.firebaseio.com", // This is for Realtime DB, kept for reference but Firestore will be used.
     projectId: "dccc-main",
     storageBucket: "dccc-main.firebasestorage.app",
     messagingSenderId: "32556317121",
@@ -17,8 +17,8 @@ const firebaseConfig = {
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
 
-// Get a reference to the database service
-export const database = getDatabase(app);
+// Get a reference to the Firestore service
+export const firestoreDB = getFirestore(app);
 
 // Get a reference to the auth service
 export const auth = getAuth(app);

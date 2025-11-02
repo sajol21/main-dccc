@@ -1,4 +1,7 @@
 {
+  "admins": {
+    "guYN9xu915XSX6NOM8j1ta5tIQn2": true
+  },
   "advisors": {
     "0": { "name": "Dr. Aminul Islam", "designation": "Principal, Dhaka College", "photoUrl": "https://picsum.photos/seed/advisor1/400/400" },
     "1": { "name": "Prof. Hasina Ahmed", "designation": "Head of Bengali Department", "photoUrl": "https://picsum.photos/seed/advisor2/400/400" }

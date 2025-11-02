@@ -60,7 +60,7 @@ const Header: React.FC<HeaderProps> = ({ currentPage, navigateTo, isAuthenticate
         <div className="container mx-auto flex items-center justify-between h-16 px-6">
           {/* Logo */}
           <a href="#home" onClick={(e) => {e.preventDefault(); navigateTo(Page.Home)}} className="flex items-center space-x-2">
-            <img src="https://res.cloudinary.com/dabfeqgsj/image/upload/v1759778648/cyizstrjgcq0w9fr8cxp.png" alt="Dhaka College Cultural Club Logo" className="h-9 w-auto object-contain" />
+            <img src="/logo.svg" alt="Dhaka College Cultural Club Logo" className="h-9 w-auto" />
             <span className="font-bold text-lg text-dc-dark hidden sm:inline">DCCC</span>
           </a>
 

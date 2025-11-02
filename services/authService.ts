@@ -5,8 +5,8 @@ import {
   onAuthStateChanged as onFirebaseAuthStateChanged,
   User,
 } from 'firebase/auth';
-import { get, ref, child } from 'firebase/database';
-import { auth, database } from '../firebase';
+import { doc, getDoc } from 'firebase/firestore';
+import { auth, firestoreDB } from '../firebase';
 
 // --- Core Auth Functions ---
 
@@ -32,16 +32,21 @@ export { auth };
 
 /**
  * Checks if a user is an administrator.
- * This function checks for the user's UID in a `/admins` node in your Realtime Database.
+ * This function checks for the user's UID in a document within the `/admins` collection in Firestore.
  * @param {string} uid The user's unique ID.
  * @returns {Promise<boolean>} True if the user is an admin, false otherwise.
  */
 export const checkAdminStatus = async (uid: string): Promise<boolean> => {
     if (!uid) return false;
     try {
-        const dbRef = ref(database);
-        const snapshot = await get(child(dbRef, `admins/${uid}`));
-        return snapshot.exists() && snapshot.val() === true;
+        const adminDocRef = doc(firestoreDB, 'admins', uid);
+        const docSnap = await getDoc(adminDocRef);
+        
+        if (docSnap.exists()) {
+            // You can add more specific checks here, e.g., docSnap.data().isAdmin === true
+            return true;
+        }
+        return false;
     } catch (error) {
         console.error("Failed to check admin status:", error);
         return false;

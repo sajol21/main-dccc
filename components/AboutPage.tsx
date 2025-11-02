@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { fetchDataAsArray, fetchDataAsObject } from '../services/dataService';
+import { fetchDataAsArray, fetchAndGroupCommitteesByYear } from '../services/dataService';
 import { Advisor, Member } from '../types';
 
 const SectionTitle: React.FC<{ children: React.ReactNode }> = ({ children }) => (
@@ -24,12 +24,12 @@ const AboutPage: React.FC = () => {
                 setLoading(true);
                 setError(null);
                 const advisorsData = await fetchDataAsArray<Advisor>('advisors');
-                const committeesData = await fetchDataAsObject<{ [year: string]: { [key: string]: Member } }>('committees');
+                const committeesData = await fetchAndGroupCommitteesByYear();
                 
                 setAdvisors(advisorsData || []);
 
                 if (committeesData && committeesData['2024']) {
-                    const committee2024 = Object.values(committeesData['2024']);
+                    const committee2024 = committeesData['2024'];
                     const pres = committee2024.find(m => m.role === 'President');
                     setPresident(pres || null);
                 }

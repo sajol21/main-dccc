@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Member } from '../types';
-import { fetchDataAsObject } from '../services/dataService';
+import { fetchAndGroupCommitteesByYear } from '../services/dataService';
 
 const MemberCard: React.FC<{ member: Member }> = ({ member }) => (
   <div className="bg-white text-center transition-all duration-300 hover:shadow-medium hover:-translate-y-2 rounded-xl overflow-hidden shadow-subtle">
@@ -27,11 +27,11 @@ const CommitteePage: React.FC = () => {
         try {
             setLoading(true);
             setError(null);
-            const data = await fetchDataAsObject<{ [year: string]: { [key: string]: Member } }>('committees');
+            const data = await fetchAndGroupCommitteesByYear();
             if (data) {
                 const formattedData = {
-                    '2024': data['2024'] ? Object.values(data['2024']) : [],
-                    '2023': data['2023'] ? Object.values(data['2023']) : [],
+                    '2024': data['2024'] || [],
+                    '2023': data['2023'] || [],
                 };
                 setCommittees(formattedData);
             } else {

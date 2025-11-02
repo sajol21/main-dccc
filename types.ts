@@ -15,6 +15,7 @@ export interface Member {
   name: string;
   role: string;
   photoUrl: string;
+  year?: number;
   socials: {
     linkedin?: string;
     facebook?: string;
