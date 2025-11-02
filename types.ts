@@ -12,6 +12,7 @@ export enum Page {
 }
 
 export interface Member {
+  id?: string;
   name: string;
   role: string;
   photoUrl: string;
@@ -31,7 +32,7 @@ export interface Advisor {
 }
 
 export interface Event {
-  id: number;
+  id?: string;
   title: string;
   date: string;
   venue: string;
@@ -42,13 +43,21 @@ export interface Event {
 }
 
 export interface Publication {
-    id: number;
+    id?: string;
     title: string;
     author: string;
     category: 'Literature' | 'Opinion' | 'Culture';
     imageUrl: string;
     excerpt: string;
     isFeatured?: boolean;
+}
+
+export interface ContactMessage {
+  id: string;
+  name: string;
+  email: string;
+  message: string;
+  timestamp: string;
 }
 
 // FIX: Add GalleryItem type definition for use in GalleryPage.tsx. This resolves import errors and subsequent type inference issues.

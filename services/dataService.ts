@@ -1,6 +1,25 @@
-import { collection, getDocs, addDoc, doc, getDoc } from 'firebase/firestore';
+import { collection, getDocs, addDoc, doc, getDoc, updateDoc, deleteDoc, query, orderBy } from 'firebase/firestore';
 import { firestoreDB } from '../firebase';
-import { Member } from '../types';
+import { Member, Event, ContactMessage } from '../types';
+
+/**
+ * Fetches an entire collection from Firestore and maps document IDs to the data objects.
+ * @param path The path to the collection.
+ * @returns A promise that resolves to an array of data objects, each including its Firestore document ID.
+ */
+export const fetchCollectionWithIds = async <T>(path: string): Promise<T[]> => {
+    try {
+        const collectionRef = collection(firestoreDB, path);
+        const querySnapshot = await getDocs(collectionRef);
+        if (querySnapshot.empty) {
+            return [];
+        }
+        return querySnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() } as T));
+    } catch (error) {
+        console.error(`Firestore fetch error from ${path}:`, error);
+        throw error;
+    }
+};
 
 export const fetchDataAsArray = async <T>(path: string): Promise<T[]> => {
   try {
@@ -24,9 +43,8 @@ export const fetchAndGroupCommitteesByYear = async (): Promise<{ [year: string]:
             console.log('No data available in collection: committees');
             return {};
         }
-        const committees = querySnapshot.docs.map(doc => doc.data() as Member);
+        const committees = querySnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() } as Member));
         
-        // Group by year
         return committees.reduce((acc, member) => {
             if (!member.year) return acc;
             const year = String(member.year);
@@ -43,7 +61,17 @@ export const fetchAndGroupCommitteesByYear = async (): Promise<{ [year: string]:
     }
 };
 
+// --- Event Management ---
+export const addEvent = (eventData: Omit<Event, 'id'>) => addDoc(collection(firestoreDB, 'events'), eventData);
+export const updateEvent = (eventId: string, eventData: Partial<Event>) => updateDoc(doc(firestoreDB, 'events', eventId), eventData);
+export const deleteEvent = (eventId: string) => deleteDoc(doc(firestoreDB, 'events', eventId));
 
+// --- Committee Management ---
+export const addCommitteeMember = (memberData: Omit<Member, 'id'>) => addDoc(collection(firestoreDB, 'committees'), memberData);
+export const updateCommitteeMember = (memberId: string, memberData: Partial<Member>) => updateDoc(doc(firestoreDB, 'committees', memberId), memberData);
+export const deleteCommitteeMember = (memberId: string) => deleteDoc(doc(firestoreDB, 'committees', memberId));
+
+// --- Contact Messages ---
 export const postContactMessage = async (name: string, email: string, message: string): Promise<void> => {
     try {
         const messagesCollectionRef = collection(firestoreDB, 'messages');
@@ -57,4 +85,11 @@ export const postContactMessage = async (name: string, email: string, message: s
         console.error("Firestore post error:", error);
         throw error;
     }
+};
+
+export const fetchMessages = async (): Promise<ContactMessage[]> => {
+    const messagesRef = collection(firestoreDB, 'messages');
+    const q = query(messagesRef, orderBy('timestamp', 'desc'));
+    const querySnapshot = await getDocs(q);
+    return querySnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() } as ContactMessage));
 };
