@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Page, Event, Member } from '../types';
-import { fetchDataAsArray, fetchAndGroupCommitteesByYear } from '../services/dataService';
+import { fetchCollectionWithIds, fetchAndGroupCommitteesByYear } from '../services/dataService';
+import MandalaBackground from './MandalaBackground';
 
 // --- Reusable Section Component ---
 const Section: React.FC<{ children: React.ReactNode; className?: string; id?: string }> = ({ children, className = '', id }) => {
@@ -70,7 +71,7 @@ const HomePage: React.FC<{ navigateTo: (page: Page) => void }> = ({ navigateTo }
   useEffect(() => {
     const loadData = async () => {
       try {
-        const eventsData = await fetchDataAsArray<Event>('events');
+        const eventsData = await fetchCollectionWithIds<Event>('events');
         const committeesData = await fetchAndGroupCommitteesByYear();
         
         setEvents(eventsData.filter(e => e.status === 'upcoming').slice(0, 3));
@@ -88,8 +89,9 @@ const HomePage: React.FC<{ navigateTo: (page: Page) => void }> = ({ navigateTo }
   return (
     <div className="pt-16">
       {/* 1. Hero Section */}
-      <div className="min-h-screen flex flex-col justify-center items-center text-center px-6 -mt-16 bg-white">
-        <div className="animate-fadeInUp">
+      <div className="relative min-h-screen flex flex-col justify-center items-center text-center px-6 -mt-16 bg-white overflow-hidden">
+        <MandalaBackground />
+        <div className="z-10 animate-fadeInUp">
           <h1 className="text-5xl md:text-7xl font-extrabold font-poppins mb-4 tracking-tight text-dc-dark">
             Art. Unity. Legacy.
           </h1>
@@ -98,7 +100,7 @@ const HomePage: React.FC<{ navigateTo: (page: Page) => void }> = ({ navigateTo }
           </p>
           <div className="mt-10">
             <a href={`#${Page.Events}`} onClick={(e) => { e.preventDefault(); navigateTo(Page.Events); }}
-               className="bg-dc-blue text-white font-bold py-3 px-8 rounded-lg hover:bg-blue-800 transition-colors duration-300">
+               className="bg-dc-blue text-white font-bold py-3 px-8 rounded-lg hover:bg-blue-800 transition-transform hover:scale-105 duration-300 shadow-lg">
               Explore Our Events
             </a>
           </div>

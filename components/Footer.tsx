@@ -18,13 +18,12 @@ const Footer: React.FC<FooterProps> = ({navigateTo}) => {
         <div className="flex flex-col md:flex-row justify-between items-center text-center md:text-left">
             <div className="mb-6 md:mb-0">
                 <a href="#home" onClick={(e) => {e.preventDefault(); navigateTo(Page.Home)}} className="flex items-center justify-center md:justify-start space-x-3 mb-2">
-                    <img src="/logo.svg" alt="Logo" className="h-9"/>
-                    <span className="font-bold text-xl">DCCC</span>
+                    <img src="https://dhakacollegeculturalclub.com/logo.png" alt="Logo" className="h-9"/>
                 </a>
                 <p className="text-sm text-dc-text">Art. Unity. Legacy.</p>
             </div>
           
-            <div className="flex items-center space-x-6 mb-6 md:mb-0">
+            <div className="flex items-center space-x-4 mb-6 md:mb-0">
                 <a href="#about" onClick={(e) => { e.preventDefault(); navigateTo(Page.About); }} className="text-sm hover:text-dc-blue transition-colors">About</a>
                 <a href="#events" onClick={(e) => { e.preventDefault(); navigateTo(Page.Events); }} className="text-sm hover:text-dc-blue transition-colors">Events</a>
                 <a href="#committee" onClick={(e) => { e.preventDefault(); navigateTo(Page.Committee); }} className="text-sm hover:text-dc-blue transition-colors">Committee</a>

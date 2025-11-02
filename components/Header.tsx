@@ -60,12 +60,11 @@ const Header: React.FC<HeaderProps> = ({ currentPage, navigateTo, isAuthenticate
         <div className="container mx-auto flex items-center justify-between h-16 px-6">
           {/* Logo */}
           <a href="#home" onClick={(e) => {e.preventDefault(); navigateTo(Page.Home)}} className="flex items-center space-x-2">
-            <img src="/logo.svg" alt="Dhaka College Cultural Club Logo" className="h-9 w-auto" />
-            <span className="font-bold text-lg text-dc-dark hidden sm:inline">DCCC</span>
+            <img src="https://dhakacollegeculturalclub.com/logo.png" alt="Dhaka College Cultural Club Logo" className="h-9 w-auto" />
           </a>
 
           {/* Desktop Nav */}
-          <nav className="hidden lg:flex items-center space-x-2">
+          <nav className="hidden lg:flex items-center space-x-1">
             {navItems.map(item => (
               <NavLink key={item.page} page={item.page} currentPage={currentPage} navigateTo={navigateTo}>
                 {item.label}
@@ -85,9 +84,14 @@ const Header: React.FC<HeaderProps> = ({ currentPage, navigateTo, isAuthenticate
                     </button>
                 </>
             ) : (
-                <a href={`#${Page.Login}`} onClick={(e) => {e.preventDefault(); navigateTo(Page.Login)}} className="bg-dc-blue text-white font-semibold py-2 px-5 rounded-lg hover:bg-blue-800 transition-colors duration-300">
-                    Portal Login
-                </a>
+                <>
+                  <a href={`#${Page.Join}`} onClick={(e) => {e.preventDefault(); navigateTo(Page.Join)}} className="bg-dc-gold text-white font-semibold py-2 px-5 rounded-lg hover:bg-amber-500 transition-colors duration-300">
+                      Join Us
+                  </a>
+                  <a href={`#${Page.Login}`} onClick={(e) => {e.preventDefault(); navigateTo(Page.Login)}} className="bg-dc-blue text-white font-semibold py-2 px-5 rounded-lg hover:bg-blue-800 transition-colors duration-300">
+                      Portal Login
+                  </a>
+                </>
             )}
           </div>
 
@@ -148,9 +152,14 @@ const Header: React.FC<HeaderProps> = ({ currentPage, navigateTo, isAuthenticate
                         </button>
                      </div>
                  ) : (
-                    <a href={`#${Page.Login}`} onClick={(e) => {e.preventDefault(); navigateTo(Page.Login); setMobileMenuOpen(false);}} className="block text-center bg-dc-blue text-white font-semibold py-3 px-5 rounded-lg hover:bg-blue-800 transition-colors duration-300">
-                       Portal Login
-                    </a>
+                    <div className="flex flex-col space-y-2 px-2">
+                      <a href={`#${Page.Join}`} onClick={(e) => {e.preventDefault(); navigateTo(Page.Join); setMobileMenuOpen(false);}} className="block text-center bg-dc-gold text-white font-semibold py-3 px-5 rounded-lg hover:bg-amber-500 transition-colors duration-300">
+                        Join Us
+                      </a>
+                      <a href={`#${Page.Login}`} onClick={(e) => {e.preventDefault(); navigateTo(Page.Login); setMobileMenuOpen(false);}} className="block text-center bg-dc-blue text-white font-semibold py-3 px-5 rounded-lg hover:bg-blue-800 transition-colors duration-300">
+                         Portal Login
+                      </a>
+                    </div>
                  )}
              </div>
           </div>

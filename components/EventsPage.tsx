@@ -1,8 +1,8 @@
 import React, { useState, useMemo, useEffect } from 'react';
 import { Event } from '../types';
-import { fetchDataAsArray } from '../services/dataService';
+import { fetchCollectionWithIds } from '../services/dataService';
 
-const EventCard: React.FC<{ event: Event }> = ({ event }) => (
+const EventCard: React.FC<{ event: Event; onRegister: (event: Event) => void; }> = ({ event, onRegister }) => (
   <div className="bg-white rounded-xl flex flex-col transition-all duration-300 hover:shadow-medium hover:-translate-y-2 overflow-hidden shadow-subtle">
     <img src={event.imageUrl} alt={event.title} loading="lazy" className="w-full h-56 object-cover" />
     <div className="p-6 flex flex-col flex-grow">
@@ -13,7 +13,7 @@ const EventCard: React.FC<{ event: Event }> = ({ event }) => (
       <h3 className="text-xl font-bold text-dc-dark mb-2 font-poppins">{event.title}</h3>
       <p className="text-dc-text text-sm mb-4 flex-grow">{event.description}</p>
       {event.status === 'upcoming' && (
-        <button className="mt-auto w-full bg-dc-blue text-white font-bold py-2 px-4 rounded-lg hover:bg-blue-800 transition-colors duration-300">
+        <button onClick={() => onRegister(event)} className="mt-auto w-full bg-dc-blue text-white font-bold py-2 px-4 rounded-lg hover:bg-blue-800 transition-colors duration-300">
           Register Now
         </button>
       )}
@@ -26,12 +26,29 @@ const EventCard: React.FC<{ event: Event }> = ({ event }) => (
   </div>
 );
 
+const RegistrationModal: React.FC<{ event: Event; onClose: () => void }> = ({ event, onClose }) => {
+    return (
+        <div className="fixed inset-0 bg-black bg-opacity-60 flex justify-center items-center z-50 animate-fadeIn">
+            <div className="bg-white p-8 rounded-lg shadow-xl w-full max-w-md text-center">
+                <h2 className="text-2xl font-bold mb-4 text-dc-dark">Confirm Registration</h2>
+                <p className="text-dc-text mb-6">You are registering for the event: <strong className="text-dc-blue">{event.title}</strong>. A confirmation will be sent to your registered email.</p>
+                <div className="flex justify-center gap-4">
+                    <button onClick={onClose} className="px-6 py-2 bg-gray-200 rounded-lg hover:bg-gray-300">Cancel</button>
+                    <button onClick={onClose} className="px-6 py-2 bg-dc-blue text-white rounded-lg hover:bg-blue-800">Confirm</button>
+                </div>
+            </div>
+        </div>
+    );
+};
+
 const EventsPage: React.FC = () => {
   const [filter, setFilter] = useState<'all' | Event['category']>('all');
   const [view, setView] = useState<'upcoming' | 'past'>('upcoming');
   const [events, setEvents] = useState<Event[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [selectedEvent, setSelectedEvent] = useState<Event | null>(null);
 
   const categories: Event['category'][] = ['Music', 'Drama', 'Debate', 'Workshop', 'Festival'];
 
@@ -40,7 +57,7 @@ const EventsPage: React.FC = () => {
         try {
             setLoading(true);
             setError(null);
-            const data = await fetchDataAsArray<Event>('events');
+            const data = await fetchCollectionWithIds<Event>('events');
             setEvents(data);
         } catch (err) {
             setError('Failed to load events. Please try again later.');
@@ -51,6 +68,11 @@ const EventsPage: React.FC = () => {
     };
     loadData();
   }, []);
+  
+  const handleRegisterClick = (event: Event) => {
+    setSelectedEvent(event);
+    setIsModalOpen(true);
+  };
 
   const filteredEvents = useMemo(() => {
     return events
@@ -60,6 +82,7 @@ const EventsPage: React.FC = () => {
 
   return (
     <div className="py-16 pt-32 bg-dc-light">
+      {isModalOpen && selectedEvent && <RegistrationModal event={selectedEvent} onClose={() => setIsModalOpen(false)} />}
       <div className="container mx-auto px-6">
         <div className="text-center mb-12 animate-fadeInUp">
           <h2 className="text-4xl md:text-5xl font-bold font-poppins text-dc-dark">Club Events</h2>
@@ -91,7 +114,7 @@ const EventsPage: React.FC = () => {
         ) : (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {filteredEvents.length > 0 ? (
-              filteredEvents.map(event => <EventCard key={event.id} event={event} />)
+              filteredEvents.map(event => <EventCard key={event.id} event={event} onRegister={handleRegisterClick} />)
             ) : (
               <div className="text-center text-dc-text col-span-full bg-white rounded-xl p-12 shadow-subtle">
                   <p>No events found for this category.</p>

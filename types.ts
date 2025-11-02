@@ -4,6 +4,7 @@ export enum Page {
   Committee = 'committee',
   Events = 'events',
   Publications = 'publications',
+  Join = 'join',
   Contact = 'contact',
   Login = 'login',
   Register = 'register',
@@ -20,7 +21,6 @@ export interface Member {
   socials: {
     linkedin?: string;
     facebook?: string;
-
     twitter?: string;
   };
 }
@@ -50,6 +50,7 @@ export interface Publication {
     imageUrl: string;
     excerpt: string;
     isFeatured?: boolean;
+    content?: string; // Enhanced for modal view
 }
 
 export interface ContactMessage {
@@ -60,20 +61,21 @@ export interface ContactMessage {
   timestamp: string;
 }
 
-// FIX: Add GalleryItem type definition for use in GalleryPage.tsx. This resolves import errors and subsequent type inference issues.
+// FIX: Added GalleryItem interface for use in GalleryPage.tsx.
 export interface GalleryItem {
-  id: number;
+  id?: string;
   title: string;
-  event: string;
-  year: number;
   type: 'photo' | 'video';
   url: string;
+  event: string;
+  year: number;
 }
 
-// FIX: Add Partner type definition for use in PartnersPage.tsx.
+// FIX: Added Partner interface for use in PartnersPage.tsx.
 export interface Partner {
+  id?: string;
   name: string;
-  description: string;
   logoUrl: string;
+  description: string;
   type: 'institutional' | 'sponsor' | 'media';
 }

@@ -21,21 +21,6 @@ export const fetchCollectionWithIds = async <T>(path: string): Promise<T[]> => {
     }
 };
 
-export const fetchDataAsArray = async <T>(path: string): Promise<T[]> => {
-  try {
-    const collectionRef = collection(firestoreDB, path);
-    const querySnapshot = await getDocs(collectionRef);
-    if (querySnapshot.empty) {
-      console.log(`No data available in collection: ${path}`);
-      return [];
-    }
-    return querySnapshot.docs.map(doc => doc.data() as T);
-  } catch (error) {
-    console.error("Firestore fetch error:", error);
-    throw error;
-  }
-};
-
 export const fetchAndGroupCommitteesByYear = async (): Promise<{ [year: string]: Member[] }> => {
     try {
         const querySnapshot = await getDocs(collection(firestoreDB, 'committees'));

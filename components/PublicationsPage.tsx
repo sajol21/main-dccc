@@ -1,8 +1,30 @@
 import React, { useState, useEffect } from 'react';
 import { Publication } from '../types';
-import { fetchDataAsArray } from '../services/dataService';
+import { fetchCollectionWithIds } from '../services/dataService';
 
-const PublicationCard: React.FC<{ pub: Publication }> = ({ pub }) => (
+const PublicationModal: React.FC<{ pub: Publication, onClose: () => void }> = ({ pub, onClose }) => {
+    return (
+        <div className="fixed inset-0 bg-black bg-opacity-70 flex justify-center items-center z-50 animate-fadeIn p-4" onClick={onClose}>
+            <div className="bg-white rounded-lg shadow-xl w-full max-w-3xl max-h-[90vh] overflow-y-auto" onClick={e => e.stopPropagation()}>
+                <img src={pub.imageUrl} alt={pub.title} className="w-full h-72 object-cover rounded-t-lg" />
+                <div className="p-8">
+                    <h2 className="text-3xl font-bold font-poppins text-dc-dark mb-2">{pub.title}</h2>
+                    <p className="text-gray-500 mb-4">By {pub.author} • {pub.category}</p>
+                    <div className="prose max-w-none text-dc-text">
+                        <p>{pub.content || pub.excerpt}</p>
+                        {/* Add more content here if available */}
+                         <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer nec odio. Praesent libero. Sed cursus ante dapibus diam. Sed nisi. Nulla quis sem at nibh elementum imperdiet. Duis sagittis ipsum. Praesent mauris. Fusce nec tellus sed augue semper porta. Mauris massa. Vestibulum lacinia arcu eget nulla. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos.</p>
+                    </div>
+                    <button onClick={onClose} className="mt-6 bg-dc-blue text-white font-bold py-2 px-6 rounded-lg hover:bg-blue-800">
+                        Close
+                    </button>
+                </div>
+            </div>
+        </div>
+    );
+};
+
+const PublicationCard: React.FC<{ pub: Publication, onReadMore: (pub: Publication) => void }> = ({ pub, onReadMore }) => (
     <div className="bg-white rounded-xl flex flex-col group transition-all duration-300 hover:shadow-medium hover:-translate-y-2 overflow-hidden shadow-subtle">
         <div className="overflow-hidden">
             <img src={pub.imageUrl} alt={pub.title} loading="lazy" className="w-full h-56 object-cover transition-transform duration-500 group-hover:scale-105" />
@@ -11,7 +33,10 @@ const PublicationCard: React.FC<{ pub: Publication }> = ({ pub }) => (
             <span className="text-sm font-semibold text-dc-blue mb-1">{pub.category}</span>
             <h3 className="text-xl font-bold font-poppins text-dc-dark mb-2">{pub.title}</h3>
             <p className="text-dc-text text-sm mb-4 flex-grow">{pub.excerpt}</p>
-            <p className="text-gray-500 text-xs mt-auto">By {pub.author}</p>
+            <div className="flex justify-between items-center mt-auto">
+                <p className="text-gray-500 text-xs">By {pub.author}</p>
+                <button onClick={() => onReadMore(pub)} className="font-semibold text-sm text-dc-blue">Read More</button>
+            </div>
         </div>
     </div>
 );
@@ -21,6 +46,7 @@ const PublicationsPage: React.FC = () => {
     const [publications, setPublications] = useState<Publication[]>([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState<string | null>(null);
+    const [selectedPub, setSelectedPub] = useState<Publication | null>(null);
 
     const categories: Publication['category'][] = ['Literature', 'Opinion', 'Culture'];
 
@@ -29,7 +55,7 @@ const PublicationsPage: React.FC = () => {
             try {
                 setLoading(true);
                 setError(null);
-                const data = await fetchDataAsArray<Publication>('publications');
+                const data = await fetchCollectionWithIds<Publication>('publications');
                 setPublications(data);
             } catch (err) {
                 setError('Failed to load publications. Please try again later.');
@@ -41,11 +67,16 @@ const PublicationsPage: React.FC = () => {
         loadData();
     }, []);
 
+    const handleReadMore = (pub: Publication) => {
+        setSelectedPub(pub);
+    };
+
     const featuredPost = publications.find(p => p.isFeatured);
-    const filteredPublications = publications.filter(p => filter === 'all' || p.category === filter);
+    const filteredPublications = publications.filter(p => !p.isFeatured && (filter === 'all' || p.category === filter));
 
     return (
         <div className="py-16 pt-32 bg-dc-light">
+            {selectedPub && <PublicationModal pub={selectedPub} onClose={() => setSelectedPub(null)} />}
             <div className="container mx-auto px-6">
                 <div className="text-center mb-12 animate-fadeInUp">
                     <h2 className="text-4xl md:text-5xl font-bold font-poppins text-dc-dark">Our Publications</h2>
@@ -65,7 +96,7 @@ const PublicationsPage: React.FC = () => {
                                     <span className="text-dc-blue font-bold">Featured Post</span>
                                     <h3 className="text-3xl font-bold font-poppins mt-2 mb-4 text-dc-dark">{featuredPost.title}</h3>
                                     <p className="text-dc-text mb-6">{featuredPost.excerpt}</p>
-                                    <button className="font-bold bg-dc-blue text-white px-6 py-2 rounded-lg hover:bg-blue-800 transition-colors">Read More</button>
+                                    <button onClick={() => handleReadMore(featuredPost)} className="font-bold bg-dc-blue text-white px-6 py-2 rounded-lg hover:bg-blue-800 transition-colors">Read More</button>
                                 </div>
                             </div>
                         </section>
@@ -88,7 +119,7 @@ const PublicationsPage: React.FC = () => {
                         </div>
                         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                             {filteredPublications.map(pub => (
-                                <PublicationCard key={pub.id} pub={pub} />
+                                <PublicationCard key={pub.id} pub={pub} onReadMore={handleReadMore} />
                             ))}
                         </div>
                     </section>

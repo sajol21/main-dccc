@@ -6,6 +6,7 @@ import AboutPage from './components/AboutPage';
 import CommitteePage from './components/CommitteePage';
 import EventsPage from './components/EventsPage';
 import PublicationsPage from './components/PublicationsPage';
+import JoinUsPage from './components/JoinUsPage';
 import ContactPage from './components/ContactPage';
 import LoginPage from './components/LoginPage';
 import RegisterPage from './components/RegisterPage';
@@ -85,6 +86,8 @@ const App: React.FC = () => {
         return <EventsPage />;
       case Page.Publications:
         return <PublicationsPage />;
+      case Page.Join:
+        return <JoinUsPage navigateTo={navigateTo} />;
       case Page.Contact:
         return <ContactPage />;
       case Page.Login:
