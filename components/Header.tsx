@@ -23,10 +23,10 @@ const NavLink: React.FC<{
         e.preventDefault();
         navigateTo(page);
       }}
-      className={`px-3 py-2 rounded-md text-sm font-medium transition-colors duration-300 ${
+      className={`px-4 py-2 rounded-full text-sm font-semibold transition-all duration-200 ${
         isActive
-          ? 'text-dc-blue font-semibold'
-          : 'text-dc-text hover:text-dc-dark'
+          ? 'bg-dc-blue text-white shadow-sm'
+          : 'text-dc-text hover:bg-gray-100'
       }`}
     >
       {children}
@@ -60,7 +60,7 @@ const Header: React.FC<HeaderProps> = ({ currentPage, navigateTo, isAuthenticate
 
   return (
     <>
-      <header className="fixed top-0 left-0 right-0 z-50 bg-white/80 backdrop-blur-lg border-b border-dc-gray/60">
+      <header className="fixed top-0 left-0 right-0 z-50 bg-white/80 backdrop-blur-lg border-b border-dc-gray/60 shadow-sm">
         <div className="container mx-auto flex items-center justify-between h-16 px-6">
           {/* Logo */}
           <a href="#home" onClick={(e) => {e.preventDefault(); navigateTo(Page.Home)}} className="flex items-center space-x-2">
@@ -68,7 +68,7 @@ const Header: React.FC<HeaderProps> = ({ currentPage, navigateTo, isAuthenticate
           </a>
 
           {/* Desktop Nav */}
-          <nav className="hidden lg:flex items-center space-x-1">
+          <nav className="hidden lg:flex items-center space-x-2">
             {navItems.map(item => (
               <NavLink key={item.page} page={item.page} currentPage={currentPage} navigateTo={navigateTo}>
                 {item.label}
@@ -125,7 +125,7 @@ const Header: React.FC<HeaderProps> = ({ currentPage, navigateTo, isAuthenticate
 
       {/* Mobile Menu Panel */}
       {isMobileMenuOpen && (
-        <div className="lg:hidden fixed top-16 left-0 right-0 z-40 bg-white shadow-lg" id="mobile-menu">
+        <div className="lg:hidden fixed top-16 left-0 right-0 z-40 bg-white shadow-lg animate-slideDown" id="mobile-menu">
           <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
             {navItems.map(item => (
                  <a

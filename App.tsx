@@ -83,7 +83,7 @@ const App: React.FC = () => {
       case Page.Committee:
         return <CommitteePage />;
       case Page.Events:
-        return <EventsPage />;
+        return <EventsPage user={currentUser} navigateTo={navigateTo} />;
       case Page.Publications:
         return <PublicationsPage />;
       case Page.Join:

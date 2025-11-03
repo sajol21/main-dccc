@@ -1,6 +1,8 @@
 import React, { useState, useMemo, useEffect } from 'react';
-import { Event } from '../types';
-import { fetchCollectionWithIds } from '../services/dataService';
+import { Event, Page } from '../types';
+import { fetchCollectionWithIds, updateEvent } from '../services/dataService';
+import { User } from 'firebase/auth';
+import { increment } from 'firebase/firestore';
 
 const EventCard: React.FC<{ event: Event; onRegister: (event: Event) => void; }> = ({ event, onRegister }) => (
   <div className="bg-white rounded-xl flex flex-col transition-all duration-300 overflow-hidden border-2 border-dc-dark shadow-neo hover:-translate-y-1 hover:-translate-x-1 hover:shadow-[6px_6px_0px_#111827]">
@@ -26,49 +28,131 @@ const EventCard: React.FC<{ event: Event; onRegister: (event: Event) => void; }>
   </div>
 );
 
-const RegistrationModal: React.FC<{ event: Event; onClose: () => void }> = ({ event, onClose }) => {
+type RegistrationStatus = 'idle' | 'confirming' | 'success' | 'error';
+
+const RegistrationModal: React.FC<{
+    event: Event;
+    userEmail: string;
+    onClose: () => void;
+    onConfirm: () => Promise<void>;
+    status: RegistrationStatus;
+}> = ({ event, userEmail, onClose, onConfirm, status }) => {
+    
+    const renderContent = () => {
+        switch(status) {
+            case 'success':
+                return (
+                    <>
+                        <h2 className="text-2xl font-bold mb-4 text-green-600">Registration Successful!</h2>
+                        <p className="text-dc-text mb-6">You have successfully registered for <strong>{event.title}</strong>. A confirmation email has been sent to <strong>{userEmail}</strong>.</p>
+                        <button onClick={onClose} className="btn-primary">Close</button>
+                    </>
+                );
+            case 'error':
+                return (
+                    <>
+                        <h2 className="text-2xl font-bold mb-4 text-red-600">Registration Failed</h2>
+                        <p className="text-dc-text mb-6">Something went wrong. Please try again.</p>
+                        <div className="flex justify-center gap-4">
+                            <button onClick={onClose} className="btn-secondary">Close</button>
+                            <button onClick={onConfirm} className="btn-primary">Try Again</button>
+                        </div>
+                    </>
+                );
+            case 'idle':
+            case 'confirming':
+            default:
+                return (
+                    <>
+                        <h2 className="text-2xl font-bold mb-4 text-dc-dark">Confirm Registration</h2>
+                        <p className="text-dc-text mb-6">You are registering for <strong className="text-dc-blue">{event.title}</strong>. A confirmation will be sent to your email: <strong>{userEmail}</strong>.</p>
+                        <div className="flex justify-center gap-4">
+                            <button onClick={onClose} disabled={status === 'confirming'} className="btn-secondary">Cancel</button>
+                            <button onClick={onConfirm} disabled={status === 'confirming'} className="btn-primary">
+                                {status === 'confirming' ? 'Confirming...' : 'Confirm'}
+                            </button>
+                        </div>
+                    </>
+                );
+        }
+    };
+
     return (
         <div className="fixed inset-0 bg-black bg-opacity-60 flex justify-center items-center z-50 animate-fadeIn p-4">
             <div className="bg-white p-8 rounded-lg shadow-xl w-full max-w-md text-center border-2 border-dc-dark shadow-neo">
-                <h2 className="text-2xl font-bold mb-4 text-dc-dark">Confirm Registration</h2>
-                <p className="text-dc-text mb-6">You are registering for the event: <strong className="text-dc-blue">{event.title}</strong>. A confirmation will be sent to your registered email.</p>
-                <div className="flex justify-center gap-4">
-                    <button onClick={onClose} className="btn-secondary">Cancel</button>
-                    <button onClick={onClose} className="btn-primary">Confirm</button>
-                </div>
+                {renderContent()}
             </div>
         </div>
     );
 };
 
-const EventsPage: React.FC = () => {
+interface EventsPageProps {
+    user: User | null;
+    navigateTo: (page: Page) => void;
+}
+
+const EventsPage: React.FC<EventsPageProps> = ({ user, navigateTo }) => {
   const [view, setView] = useState<'upcoming' | 'past'>('upcoming');
   const [events, setEvents] = useState<Event[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedEvent, setSelectedEvent] = useState<Event | null>(null);
+  const [registrationStatus, setRegistrationStatus] = useState<RegistrationStatus>('idle');
+
+  const loadData = async () => {
+      try {
+          setLoading(true);
+          setError(null);
+          const data = await fetchCollectionWithIds<Event>('events');
+          setEvents(data);
+      } catch (err) {
+          setError('Failed to load events. Please try again later.');
+          console.error(err);
+      } finally {
+          setLoading(false);
+      }
+  };
 
   useEffect(() => {
-    const loadData = async () => {
-        try {
-            setLoading(true);
-            setError(null);
-            const data = await fetchCollectionWithIds<Event>('events');
-            setEvents(data);
-        } catch (err) {
-            setError('Failed to load events. Please try again later.');
-            console.error(err);
-        } finally {
-            setLoading(false);
-        }
-    };
     loadData();
   }, []);
   
   const handleRegisterClick = (event: Event) => {
+    if (!user) {
+        navigateTo(Page.Login);
+        return;
+    }
     setSelectedEvent(event);
     setIsModalOpen(true);
+  };
+
+  const handleConfirmRegistration = async () => {
+    if (!selectedEvent || !user) return;
+    setRegistrationStatus('confirming');
+
+    try {
+        // 1. Simulate sending email
+        console.log(`Sending registration confirmation for event "${selectedEvent.title}" to ${user.email}`);
+
+        // 2. Update registration count in Firestore
+        await updateEvent(selectedEvent.id!, {
+            registrationCount: increment(1)
+        });
+        
+        setRegistrationStatus('success');
+        loadData(); // Refresh data to show updated counts if we were displaying them
+
+    } catch (error) {
+        console.error("Failed to register for event:", error);
+        setRegistrationStatus('error');
+    }
+  };
+
+  const closeModal = () => {
+    setIsModalOpen(false);
+    setSelectedEvent(null);
+    setTimeout(() => setRegistrationStatus('idle'), 300); // Reset status after modal closes
   };
 
   const filteredEvents = useMemo(() => {
@@ -77,7 +161,15 @@ const EventsPage: React.FC = () => {
 
   return (
     <div className="py-16 pt-32 bg-dc-light">
-      {isModalOpen && selectedEvent && <RegistrationModal event={selectedEvent} onClose={() => setIsModalOpen(false)} />}
+      {isModalOpen && selectedEvent && user && (
+          <RegistrationModal 
+              event={selectedEvent} 
+              userEmail={user.email!}
+              onClose={closeModal}
+              onConfirm={handleConfirmRegistration}
+              status={registrationStatus}
+          />
+      )}
       <div className="container mx-auto px-6">
         <div className="text-center mb-12 animate-fadeInUp">
           <h2 className="text-4xl md:text-5xl font-bold font-poppins text-dc-dark">Club Events</h2>

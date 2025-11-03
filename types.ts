@@ -41,6 +41,7 @@ export interface Event {
   imageUrl: string;
   category: 'Music' | 'Drama' | 'Debate' | 'Workshop' | 'Festival';
   status: 'upcoming' | 'past';
+  registrationCount?: number;
 }
 
 export interface Publication {

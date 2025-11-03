@@ -13,7 +13,7 @@ const MemberForm: React.FC<{
             role: '',
             photoUrl: '',
             year: new Date().getFullYear(),
-            socials: { facebook: '', linkedin: '', twitter: '' }
+            socials: { facebook: '', linkedin: '' }
         };
         if (!member) return defaultData;
         // Deep merge to ensure socials object is always present and has all keys
@@ -53,17 +53,34 @@ const MemberForm: React.FC<{
             <div className="bg-white p-8 rounded-xl shadow-xl w-full max-w-2xl max-h-[90vh] overflow-y-auto">
                 <h2 className="text-2xl font-bold font-poppins text-dc-dark mb-6">{member?.id ? 'Edit Member' : 'Add New Member'}</h2>
                 <form onSubmit={handleSubmit} className="space-y-4">
-                    <input name="name" value={formData.name || ''} onChange={handleChange} placeholder="Full Name" required />
-                    <input name="role" value={formData.role || ''} onChange={handleChange} placeholder="Role (e.g., President)" required />
-                    <input name="photoUrl" value={formData.photoUrl || ''} onChange={handleChange} placeholder="Photo URL" required />
-                    <input name="year" value={formData.year || ''} onChange={handleChange} type="number" placeholder="Committee Year" required />
+                    <div>
+                        <label htmlFor="name" className="sr-only">Full Name</label>
+                        <input id="name" name="name" value={formData.name || ''} onChange={handleChange} placeholder="Full Name" required />
+                    </div>
+                     <div>
+                        <label htmlFor="role" className="sr-only">Role</label>
+                        <input id="role" name="role" value={formData.role || ''} onChange={handleChange} placeholder="Role (e.g., President)" required />
+                    </div>
+                     <div>
+                        <label htmlFor="photoUrl" className="sr-only">Photo URL</label>
+                        <input id="photoUrl" name="photoUrl" value={formData.photoUrl || ''} onChange={handleChange} placeholder="Photo URL" required />
+                    </div>
+                     <div>
+                        <label htmlFor="year" className="sr-only">Committee Year</label>
+                        <input id="year" name="year" value={formData.year || ''} onChange={handleChange} type="number" placeholder="Committee Year" required />
+                    </div>
 
                     <div className="pt-2">
                         <h3 className="text-lg font-semibold text-dc-text mb-2">Social Links (Optional)</h3>
                         <div className="space-y-3">
-                            <input name="facebook" value={formData.socials?.facebook || ''} onChange={handleSocialChange} placeholder="Facebook URL" />
-                            <input name="linkedin" value={formData.socials?.linkedin || ''} onChange={handleSocialChange} placeholder="LinkedIn URL" />
-                            <input name="twitter" value={formData.socials?.twitter || ''} onChange={handleSocialChange} placeholder="Twitter URL" />
+                            <div>
+                               <label htmlFor="facebook" className="sr-only">Facebook URL</label>
+                               <input id="facebook" name="facebook" value={formData.socials?.facebook || ''} onChange={handleSocialChange} placeholder="Facebook URL" />
+                            </div>
+                            <div>
+                                <label htmlFor="linkedin" className="sr-only">LinkedIn URL</label>
+                                <input id="linkedin" name="linkedin" value={formData.socials?.linkedin || ''} onChange={handleSocialChange} placeholder="LinkedIn URL" />
+                            </div>
                         </div>
                     </div>
 
