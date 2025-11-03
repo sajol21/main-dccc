@@ -20,10 +20,10 @@ const Footer: React.FC<FooterProps> = ({navigateTo}) => {
                 <a href="#home" onClick={(e) => {e.preventDefault(); navigateTo(Page.Home)}} className="flex items-center justify-center md:justify-start space-x-3 mb-2">
                     <img src="https://dhakacollegeculturalclub.com/logo.png" alt="Logo" className="h-9"/>
                 </a>
-                <p className="text-sm text-dc-text">Art. Unity. Legacy.</p>
+                <p className="text-sm text-dc-text font-semibold">Know Thyself, Show Thyself.</p>
             </div>
           
-            <div className="flex items-center space-x-4 mb-6 md:mb-0">
+            <div className="flex items-center space-x-4 mb-6 md:mb-0 flex-wrap justify-center">
                 <a href="#about" onClick={(e) => { e.preventDefault(); navigateTo(Page.About); }} className="text-sm hover:text-dc-blue transition-colors">About</a>
                 <a href="#events" onClick={(e) => { e.preventDefault(); navigateTo(Page.Events); }} className="text-sm hover:text-dc-blue transition-colors">Events</a>
                 <a href="#committee" onClick={(e) => { e.preventDefault(); navigateTo(Page.Committee); }} className="text-sm hover:text-dc-blue transition-colors">Committee</a>

@@ -15,11 +15,15 @@
           extend: {
             colors: {
               'dc-blue': '#1E40AF',
+              'dc-blue-dark': '#1D3A9A',
               'dc-gold': '#F59E0B',
+              'dc-gold-dark': '#D97706',
               'dc-dark': '#111827',
               'dc-light': '#F9FAFB',
               'dc-gray': '#E5E7EB',
               'dc-text': '#374151',
+              'dc-yellow': '#FBBF24',
+              'dc-pink': '#EC4899',
             },
             fontFamily: {
               sans: ['Inter', 'sans-serif'],
@@ -28,6 +32,8 @@
             boxShadow: {
                 'subtle': '0 4px 6px -1px rgb(0 0 0 / 0.05), 0 2px 4px -2px rgb(0 0 0 / 0.05)',
                 'medium': '0 10px 15px -3px rgb(0 0 0 / 0.07), 0 4px 6px -4px rgb(0 0 0 / 0.07)',
+                'neo': '4px 4px 0px #111827',
+                'neo-sm': '2px 2px 0px #111827',
             },
             keyframes: {
                 fadeInUp: {
@@ -62,9 +68,42 @@
             @apply bg-dc-light text-dc-dark font-sans;
         }
         button, a {
-            @apply transition-all duration-300;
+            @apply transition-all duration-200;
+        }
+        input[type="text"],
+        input[type="email"],
+        input[type="password"],
+        input[type="number"],
+        textarea,
+        select {
+          @apply w-full p-3 bg-white border-2 border-dc-dark rounded-lg focus:ring-2 focus:ring-dc-gold focus:outline-none placeholder-gray-500 shadow-neo-sm;
         }
       }
+      
+      @layer components {
+        .btn {
+          @apply inline-block font-bold py-3 px-6 rounded-lg text-center transition-all duration-200 ease-in-out border-2 border-dc-dark shadow-neo;
+        }
+        .btn:hover {
+            @apply -translate-y-1 -translate-x-1 shadow-[6px_6px_0px_#111827];
+        }
+        .btn:active {
+            @apply translate-y-0 translate-x-0 shadow-neo-sm;
+        }
+        .btn-primary {
+          @apply btn bg-dc-blue text-white;
+        }
+        .btn-gold {
+            @apply btn bg-dc-yellow text-dc-dark;
+        }
+        .btn-secondary {
+            @apply btn bg-gray-200 text-dc-text;
+        }
+        .btn-outline {
+            @apply btn bg-transparent text-dc-dark hover:bg-dc-dark hover:text-white;
+        }
+      }
+
       /* Custom Scrollbar */
       ::-webkit-scrollbar {
         width: 8px;

@@ -89,7 +89,7 @@ const PartnersPage: React.FC = () => {
         <div className="mt-12 bg-white rounded-xl p-8 text-center shadow-medium">
             <h3 className="text-2xl font-bold font-poppins text-dc-dark">Become a Partner</h3>
             <p className="text-dc-text mt-2 mb-6 max-w-xl mx-auto">Support the next generation of artists and leaders. Partner with us to make a lasting impact on the cultural fabric of our community.</p>
-            <a href="#contact" className="bg-dc-blue text-white font-bold py-3 px-8 rounded-lg hover:bg-blue-800 transition-colors">
+            <a href="#contact" className="btn-primary !px-8">
                 Contact Us for Partnership
             </a>
         </div>

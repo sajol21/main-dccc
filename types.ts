@@ -26,6 +26,7 @@ export interface Member {
 }
 
 export interface Advisor {
+    id?: string;
     name: string;
     designation: string;
     photoUrl: string;
@@ -61,7 +62,7 @@ export interface ContactMessage {
   timestamp: string;
 }
 
-// FIX: Added GalleryItem interface for use in GalleryPage.tsx.
+// FIX: Add missing GalleryItem and Partner types.
 export interface GalleryItem {
   id?: string;
   title: string;
@@ -71,7 +72,6 @@ export interface GalleryItem {
   year: number;
 }
 
-// FIX: Added Partner interface for use in PartnersPage.tsx.
 export interface Partner {
   id?: string;
   name: string;

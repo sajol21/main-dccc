@@ -6,6 +6,7 @@ interface HeaderProps {
   currentPage: Page;
   navigateTo: (page: Page) => void;
   isAuthenticated: boolean;
+  isAdmin: boolean;
 }
 
 const NavLink: React.FC<{
@@ -33,7 +34,7 @@ const NavLink: React.FC<{
   );
 };
 
-const Header: React.FC<HeaderProps> = ({ currentPage, navigateTo, isAuthenticated }) => {
+const Header: React.FC<HeaderProps> = ({ currentPage, navigateTo, isAuthenticated, isAdmin }) => {
   const [isMobileMenuOpen, setMobileMenuOpen] = useState(false);
   
   const navItems = [
@@ -45,6 +46,9 @@ const Header: React.FC<HeaderProps> = ({ currentPage, navigateTo, isAuthenticate
     { page: Page.Contact, label: 'Contact' },
   ];
   
+  const portalPage = isAdmin ? Page.Admin : Page.Portal;
+  const portalLabel = isAdmin ? 'Admin Panel' : 'Go to Portal';
+
   const onLogout = async () => {
     try {
         await handleLogout();
@@ -76,8 +80,8 @@ const Header: React.FC<HeaderProps> = ({ currentPage, navigateTo, isAuthenticate
           <div className="hidden lg:flex items-center space-x-2">
             {isAuthenticated ? (
                 <>
-                    <a href={`#${Page.Portal}`} onClick={(e) => {e.preventDefault(); navigateTo(Page.Portal)}} className="bg-dc-blue text-white font-semibold text-sm py-2 px-4 rounded-lg hover:bg-blue-800 transition-colors duration-300">
-                        Go to Portal
+                    <a href={`#${portalPage}`} onClick={(e) => {e.preventDefault(); navigateTo(portalPage)}} className="btn-primary !py-2 !px-4 text-sm">
+                        {portalLabel}
                     </a>
                     <button onClick={onLogout} className="text-dc-text font-semibold text-sm py-2 px-4 rounded-lg hover:bg-gray-200 transition-colors duration-300">
                         Logout
@@ -85,10 +89,10 @@ const Header: React.FC<HeaderProps> = ({ currentPage, navigateTo, isAuthenticate
                 </>
             ) : (
                 <>
-                  <a href={`#${Page.Join}`} onClick={(e) => {e.preventDefault(); navigateTo(Page.Join)}} className="bg-dc-gold text-white font-semibold py-2 px-5 rounded-lg hover:bg-amber-500 transition-colors duration-300">
+                  <a href={`#${Page.Join}`} onClick={(e) => {e.preventDefault(); navigateTo(Page.Join)}} className="btn-gold !py-2 !px-5 text-sm">
                       Join Us
                   </a>
-                  <a href={`#${Page.Login}`} onClick={(e) => {e.preventDefault(); navigateTo(Page.Login)}} className="bg-dc-blue text-white font-semibold py-2 px-5 rounded-lg hover:bg-blue-800 transition-colors duration-300">
+                  <a href={`#${Page.Login}`} onClick={(e) => {e.preventDefault(); navigateTo(Page.Login)}} className="btn-primary !py-2 !px-5 text-sm">
                       Portal Login
                   </a>
                 </>
@@ -144,8 +148,8 @@ const Header: React.FC<HeaderProps> = ({ currentPage, navigateTo, isAuthenticate
              <div className="border-t border-dc-gray mt-4 pt-4">
                  {isAuthenticated ? (
                      <div className="flex flex-col space-y-2 px-2">
-                        <a href={`#${Page.Portal}`} onClick={(e) => {e.preventDefault(); navigateTo(Page.Portal); setMobileMenuOpen(false);}} className="text-center bg-dc-blue text-white font-semibold py-2 px-4 rounded-md hover:bg-blue-800 transition-colors duration-300">
-                           Go to Portal
+                        <a href={`#${portalPage}`} onClick={(e) => {e.preventDefault(); navigateTo(portalPage); setMobileMenuOpen(false);}} className="btn-primary text-sm">
+                           {portalLabel}
                         </a>
                         <button onClick={()=>{onLogout(); setMobileMenuOpen(false);}} className="text-center text-dc-text font-semibold py-2 px-4 rounded-md hover:bg-gray-200 transition-colors duration-300">
                            Logout
@@ -153,10 +157,10 @@ const Header: React.FC<HeaderProps> = ({ currentPage, navigateTo, isAuthenticate
                      </div>
                  ) : (
                     <div className="flex flex-col space-y-2 px-2">
-                      <a href={`#${Page.Join}`} onClick={(e) => {e.preventDefault(); navigateTo(Page.Join); setMobileMenuOpen(false);}} className="block text-center bg-dc-gold text-white font-semibold py-3 px-5 rounded-lg hover:bg-amber-500 transition-colors duration-300">
+                      <a href={`#${Page.Join}`} onClick={(e) => {e.preventDefault(); navigateTo(Page.Join); setMobileMenuOpen(false);}} className="btn-gold">
                         Join Us
                       </a>
-                      <a href={`#${Page.Login}`} onClick={(e) => {e.preventDefault(); navigateTo(Page.Login); setMobileMenuOpen(false);}} className="block text-center bg-dc-blue text-white font-semibold py-3 px-5 rounded-lg hover:bg-blue-800 transition-colors duration-300">
+                      <a href={`#${Page.Login}`} onClick={(e) => {e.preventDefault(); navigateTo(Page.Login); setMobileMenuOpen(false);}} className="btn-primary">
                          Portal Login
                       </a>
                     </div>

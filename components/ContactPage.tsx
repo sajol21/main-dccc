@@ -51,10 +51,10 @@ const ContactPage: React.FC = () => {
                             </div>
                         ) : (
                             <form onSubmit={handleSubmit} className="space-y-6">
-                                <input name="name" type="text" placeholder="Your Name" required className="w-full p-3 bg-gray-50 border border-dc-gray text-dc-dark rounded-lg focus:ring-2 focus:ring-dc-blue focus:outline-none placeholder-gray-400" />
-                                <input name="email" type="email" placeholder="Your Email" required className="w-full p-3 bg-gray-50 border border-dc-gray text-dc-dark rounded-lg focus:ring-2 focus:ring-dc-blue focus:outline-none placeholder-gray-400" />
-                                <textarea name="message" placeholder="Your Message" rows={5} required className="w-full p-3 bg-gray-50 border border-dc-gray text-dc-dark rounded-lg focus:ring-2 focus:ring-dc-blue focus:outline-none placeholder-gray-400"></textarea>
-                                <button type="submit" disabled={isSubmitting} className="w-full bg-dc-blue text-white font-bold py-3 px-6 rounded-lg hover:bg-blue-800 transition-colors disabled:bg-gray-400 disabled:cursor-not-allowed">
+                                <input name="name" type="text" placeholder="Your Name" required />
+                                <input name="email" type="email" placeholder="Your Email" required />
+                                <textarea name="message" placeholder="Your Message" rows={5} required></textarea>
+                                <button type="submit" disabled={isSubmitting} className="btn-primary w-full disabled:bg-gray-400 disabled:cursor-not-allowed disabled:transform-none disabled:shadow-none">
                                     {isSubmitting ? 'Sending...' : 'Send Message'}
                                 </button>
                                 {submitError && <p className="text-red-500 text-center">{submitError}</p>}

@@ -24,7 +24,7 @@ const JoinUsPage: React.FC<{ navigateTo: (page: Page) => void }> = ({ navigateTo
                 </p>
                 <button
                     onClick={() => navigateTo(Page.Register)}
-                    className="mt-8 bg-dc-gold text-white font-bold py-3 px-10 rounded-lg text-lg hover:bg-amber-500 transition-transform hover:scale-105 duration-300 shadow-lg"
+                    className="mt-8 btn-gold !px-10 text-lg"
                 >
                     Register Now
                 </button>
@@ -62,7 +62,7 @@ const JoinUsPage: React.FC<{ navigateTo: (page: Page) => void }> = ({ navigateTo
                      <p className="max-w-xl mx-auto mb-6">Your journey into the vibrant world of arts and culture at Dhaka College starts here.</p>
                      <button
                         onClick={() => navigateTo(Page.Register)}
-                        className="bg-white text-dc-blue font-bold py-3 px-8 rounded-lg text-lg hover:bg-gray-200 transition-colors"
+                        className="btn bg-white text-dc-blue hover:bg-gray-200 !px-8 text-lg"
                     >
                         Create Your Account
                     </button>

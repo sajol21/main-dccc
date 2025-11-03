@@ -1,6 +1,7 @@
 import { collection, getDocs, addDoc, doc, getDoc, updateDoc, deleteDoc, query, orderBy } from 'firebase/firestore';
 import { firestoreDB } from '../firebase';
-import { Member, Event, ContactMessage } from '../types';
+// FIX: Import missing GalleryItem and Partner types.
+import { Member, Event, ContactMessage, Advisor, Publication, GalleryItem, Partner } from '../types';
 
 /**
  * Fetches an entire collection from Firestore and maps document IDs to the data objects.
@@ -55,6 +56,27 @@ export const deleteEvent = (eventId: string) => deleteDoc(doc(firestoreDB, 'even
 export const addCommitteeMember = (memberData: Omit<Member, 'id'>) => addDoc(collection(firestoreDB, 'committees'), memberData);
 export const updateCommitteeMember = (memberId: string, memberData: Partial<Member>) => updateDoc(doc(firestoreDB, 'committees', memberId), memberData);
 export const deleteCommitteeMember = (memberId: string) => deleteDoc(doc(firestoreDB, 'committees', memberId));
+
+// --- Advisor Management ---
+export const addAdvisor = (advisorData: Omit<Advisor, 'id'>) => addDoc(collection(firestoreDB, 'advisors'), advisorData);
+export const updateAdvisor = (advisorId: string, advisorData: Partial<Advisor>) => updateDoc(doc(firestoreDB, 'advisors', advisorId), advisorData);
+export const deleteAdvisor = (advisorId: string) => deleteDoc(doc(firestoreDB, 'advisors', advisorId));
+
+// --- Publication Management ---
+export const addPublication = (pubData: Omit<Publication, 'id'>) => addDoc(collection(firestoreDB, 'publications'), pubData);
+export const updatePublication = (pubId: string, pubData: Partial<Publication>) => updateDoc(doc(firestoreDB, 'publications', pubId), pubData);
+export const deletePublication = (pubId: string) => deleteDoc(doc(firestoreDB, 'publications', pubId));
+
+// FIX: Add missing Gallery and Partner management functions.
+// --- Gallery Management ---
+export const addGalleryItem = (itemData: Omit<GalleryItem, 'id'>) => addDoc(collection(firestoreDB, 'galleryItems'), itemData);
+export const updateGalleryItem = (itemId: string, itemData: Partial<GalleryItem>) => updateDoc(doc(firestoreDB, 'galleryItems', itemId), itemData);
+export const deleteGalleryItem = (itemId: string) => deleteDoc(doc(firestoreDB, 'galleryItems', itemId));
+
+// --- Partner Management ---
+export const addPartner = (partnerData: Omit<Partner, 'id'>) => addDoc(collection(firestoreDB, 'partners'), partnerData);
+export const updatePartner = (partnerId: string, partnerData: Partial<Partner>) => updateDoc(doc(firestoreDB, 'partners', partnerId), partnerData);
+export const deletePartner = (partnerId: string) => deleteDoc(doc(firestoreDB, 'partners', partnerId));
 
 // --- Contact Messages ---
 export const postContactMessage = async (name: string, email: string, message: string): Promise<void> => {

@@ -25,27 +25,27 @@ const EventForm: React.FC<{
             <div className="bg-white p-8 rounded-lg shadow-xl w-full max-w-2xl">
                 <h2 className="text-2xl font-bold mb-4">{event?.id ? 'Edit Event' : 'Add New Event'}</h2>
                 <form onSubmit={handleSubmit} className="space-y-4">
-                    <input name="title" value={formData.title} onChange={handleChange} placeholder="Title" required className="w-full p-2 border rounded" />
-                    <input name="date" value={formData.date} onChange={handleChange} placeholder="Date (e.g., 25 DEC 2024)" required className="w-full p-2 border rounded" />
-                    <input name="venue" value={formData.venue} onChange={handleChange} placeholder="Venue" required className="w-full p-2 border rounded" />
-                    <textarea name="description" value={formData.description} onChange={handleChange} placeholder="Description" required className="w-full p-2 border rounded h-24" />
-                    <input name="imageUrl" value={formData.imageUrl} onChange={handleChange} placeholder="Image URL" required className="w-full p-2 border rounded" />
+                    <input name="title" value={formData.title} onChange={handleChange} placeholder="Title" required />
+                    <input name="date" value={formData.date} onChange={handleChange} placeholder="Date (e.g., 25 DEC 2024)" required />
+                    <input name="venue" value={formData.venue} onChange={handleChange} placeholder="Venue" required />
+                    <textarea name="description" value={formData.description} onChange={handleChange} placeholder="Description" required className="h-24" />
+                    <input name="imageUrl" value={formData.imageUrl} onChange={handleChange} placeholder="Image URL" required />
                     <div className="flex gap-4">
-                        <select name="category" value={formData.category} onChange={handleChange} required className="w-full p-2 border rounded">
+                        <select name="category" value={formData.category} onChange={handleChange} required>
                             <option value="Music">Music</option>
                             <option value="Drama">Drama</option>
                             <option value="Debate">Debate</option>
                             <option value="Workshop">Workshop</option>
                             <option value="Festival">Festival</option>
                         </select>
-                        <select name="status" value={formData.status} onChange={handleChange} required className="w-full p-2 border rounded">
+                        <select name="status" value={formData.status} onChange={handleChange} required>
                             <option value="upcoming">Upcoming</option>
                             <option value="past">Past</option>
                         </select>
                     </div>
                     <div className="flex justify-end gap-4 mt-4">
-                        <button type="button" onClick={onCancel} className="px-4 py-2 bg-gray-200 rounded-lg">Cancel</button>
-                        <button type="submit" className="px-4 py-2 bg-dc-blue text-white rounded-lg">Save Event</button>
+                        <button type="button" onClick={onCancel} className="btn-secondary !py-2">Cancel</button>
+                        <button type="submit" className="btn-primary !py-2">Save Event</button>
                     </div>
                 </form>
             </div>
@@ -118,7 +118,7 @@ const ManageEvents: React.FC = () => {
         <div>
             <div className="flex justify-between items-center mb-6">
                 <h1 className="text-3xl font-bold">Manage Events</h1>
-                <button onClick={openAddModal} className="px-4 py-2 bg-dc-blue text-white rounded-lg">Add New Event</button>
+                <button onClick={openAddModal} className="btn-primary !py-2">Add New Event</button>
             </div>
 
             {isModalOpen && <EventForm event={editingEvent} onSave={handleSave} onCancel={() => { setIsModalOpen(false); setEditingEvent(null); }} />}

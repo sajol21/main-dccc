@@ -15,7 +15,7 @@ const PublicationModal: React.FC<{ pub: Publication, onClose: () => void }> = ({
                         {/* Add more content here if available */}
                          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer nec odio. Praesent libero. Sed cursus ante dapibus diam. Sed nisi. Nulla quis sem at nibh elementum imperdiet. Duis sagittis ipsum. Praesent mauris. Fusce nec tellus sed augue semper porta. Mauris massa. Vestibulum lacinia arcu eget nulla. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos.</p>
                     </div>
-                    <button onClick={onClose} className="mt-6 bg-dc-blue text-white font-bold py-2 px-6 rounded-lg hover:bg-blue-800">
+                    <button onClick={onClose} className="mt-6 btn-primary">
                         Close
                     </button>
                 </div>
@@ -96,7 +96,7 @@ const PublicationsPage: React.FC = () => {
                                     <span className="text-dc-blue font-bold">Featured Post</span>
                                     <h3 className="text-3xl font-bold font-poppins mt-2 mb-4 text-dc-dark">{featuredPost.title}</h3>
                                     <p className="text-dc-text mb-6">{featuredPost.excerpt}</p>
-                                    <button onClick={() => handleReadMore(featuredPost)} className="font-bold bg-dc-blue text-white px-6 py-2 rounded-lg hover:bg-blue-800 transition-colors">Read More</button>
+                                    <button onClick={() => handleReadMore(featuredPost)} className="btn-primary">Read More</button>
                                 </div>
                             </div>
                         </section>
@@ -105,16 +105,16 @@ const PublicationsPage: React.FC = () => {
                     <section className="text-center mb-16 bg-white rounded-xl p-12 shadow-subtle">
                         <h3 className="text-2xl font-bold font-poppins text-dc-dark mb-4">"The Cultural Canvas"</h3>
                         <p className="text-dc-text mb-6 max-w-xl mx-auto">Dive into our collection of digital magazines, a tapestry of creativity woven by our members.</p>
-                        <a href="#" className="inline-block bg-dc-blue text-white font-bold py-3 px-8 rounded-lg hover:bg-blue-800 transition-colors">
+                        <a href="#" className="btn-primary !px-8">
                             Download Latest Issue
                         </a>
                     </section>
                     
                     <section>
                         <div className="flex flex-wrap justify-center gap-2 mb-10">
-                            <button onClick={() => setFilter('all')} className={`px-4 py-2 text-sm font-semibold transition-colors rounded-full ${filter === 'all' ? 'bg-dc-blue text-white' : 'bg-white text-dc-text hover:bg-gray-200'}`}>All Articles</button>
+                            <button onClick={() => setFilter('all')} className={`px-4 py-2 text-sm font-semibold transition-colors rounded-full ${filter === 'all' ? 'bg-dc-blue text-white shadow-md' : 'bg-white text-dc-text hover:bg-gray-200'}`}>All Articles</button>
                             {categories.map(cat => (
-                                <button key={cat} onClick={() => setFilter(cat)} className={`px-4 py-2 text-sm font-semibold transition-colors rounded-full ${filter === cat ? 'bg-dc-blue text-white' : 'bg-white text-dc-text hover:bg-gray-200'}`}>{cat}</button>
+                                <button key={cat} onClick={() => setFilter(cat)} className={`px-4 py-2 text-sm font-semibold transition-colors rounded-full ${filter === cat ? 'bg-dc-blue text-white shadow-md' : 'bg-white text-dc-text hover:bg-gray-200'}`}>{cat}</button>
                             ))}
                         </div>
                         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">

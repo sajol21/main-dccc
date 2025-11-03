@@ -105,7 +105,7 @@ const App: React.FC = () => {
 
   return (
     <div className="bg-dc-light text-dc-dark font-sans">
-      <Header currentPage={currentPage} navigateTo={navigateTo} isAuthenticated={!!currentUser} />
+      <Header currentPage={currentPage} navigateTo={navigateTo} isAuthenticated={!!currentUser} isAdmin={isAdmin} />
       <main className="min-h-screen">
         {renderPage()}
       </main>

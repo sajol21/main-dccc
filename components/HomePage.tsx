@@ -93,14 +93,14 @@ const HomePage: React.FC<{ navigateTo: (page: Page) => void }> = ({ navigateTo }
         <MandalaBackground />
         <div className="z-10 animate-fadeInUp">
           <h1 className="text-5xl md:text-7xl font-extrabold font-poppins mb-4 tracking-tight text-dc-dark">
-            Art. Unity. Legacy.
+            Know Thyself, Show Thyself.
           </h1>
           <p className="max-w-2xl mx-auto mt-4 text-lg text-dc-text">
-            Dhaka College Cultural Club is where creativity finds its voice and tradition meets tomorrow.
+             Discover your potential and share your passion with a community that celebrates individuality and expression.
           </p>
           <div className="mt-10">
             <a href={`#${Page.Events}`} onClick={(e) => { e.preventDefault(); navigateTo(Page.Events); }}
-               className="bg-dc-blue text-white font-bold py-3 px-8 rounded-lg hover:bg-blue-800 transition-transform hover:scale-105 duration-300 shadow-lg">
+               className="btn-primary !px-8">
               Explore Our Events
             </a>
           </div>
@@ -116,7 +116,7 @@ const HomePage: React.FC<{ navigateTo: (page: Page) => void }> = ({ navigateTo }
               For over a decade, we have been the premier platform for students to explore their artistic talents, from captivating stage performances to thought-provoking literary works. We are a community dedicated to fostering creativity and keeping the cultural flame alive.
             </p>
             <a href={`#${Page.About}`} onClick={(e) => { e.preventDefault(); navigateTo(Page.About); }}
-               className="border-2 border-dc-blue text-dc-blue font-bold py-2 px-6 rounded-lg hover:bg-dc-blue hover:text-white transition-colors duration-300">
+               className="btn-outline !py-2">
               Our Story
             </a>
           </div>
@@ -156,7 +156,7 @@ const HomePage: React.FC<{ navigateTo: (page: Page) => void }> = ({ navigateTo }
         )}
          <div className="text-center mt-12">
             <a href={`#${Page.Committee}`} onClick={(e) => { e.preventDefault(); navigateTo(Page.Committee); }} 
-               className="border-2 border-dc-blue text-dc-blue font-bold py-2 px-6 rounded-lg hover:bg-dc-blue hover:text-white transition-colors duration-300">
+               className="btn-outline !py-2">
                 Meet the Full Team
             </a>
         </div>

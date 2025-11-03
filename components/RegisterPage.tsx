@@ -48,7 +48,6 @@ const RegisterPage: React.FC<RegisterPageProps> = ({ onRegisterSuccess, navigate
                         required
                         value={email}
                         onChange={(e) => setEmail(e.target.value)}
-                        className="w-full p-3 bg-gray-50 border border-dc-gray text-dc-dark rounded-lg focus:ring-2 focus:ring-dc-blue focus:outline-none placeholder-gray-400"
                         placeholder="Email address"
                     />
                     <input
@@ -57,7 +56,6 @@ const RegisterPage: React.FC<RegisterPageProps> = ({ onRegisterSuccess, navigate
                         required
                         value={password}
                         onChange={(e) => setPassword(e.target.value)}
-                        className="w-full p-3 bg-gray-50 border border-dc-gray text-dc-dark rounded-lg focus:ring-2 focus:ring-dc-blue focus:outline-none placeholder-gray-400"
                         placeholder="Password"
                     />
                     <input
@@ -66,14 +64,13 @@ const RegisterPage: React.FC<RegisterPageProps> = ({ onRegisterSuccess, navigate
                         required
                         value={confirmPassword}
                         onChange={(e) => setConfirmPassword(e.target.value)}
-                        className="w-full p-3 bg-gray-50 border border-dc-gray text-dc-dark rounded-lg focus:ring-2 focus:ring-dc-blue focus:outline-none placeholder-gray-400"
                         placeholder="Confirm Password"
                     />
 
                     {error && <p className="text-red-500 text-sm text-center">{error}</p>}
 
                     <div>
-                        <button type="submit" disabled={isLoading} className="w-full bg-dc-blue text-white font-bold py-3 px-6 rounded-lg hover:bg-blue-800 transition-colors disabled:bg-gray-400 disabled:cursor-not-allowed">
+                        <button type="submit" disabled={isLoading} className="btn-primary w-full disabled:bg-gray-400 disabled:cursor-not-allowed disabled:transform-none disabled:shadow-none">
                             {isLoading ? 'Creating Account...' : 'Register'}
                         </button>
                     </div>
