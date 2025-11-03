@@ -43,6 +43,8 @@ const Header: React.FC<HeaderProps> = ({ currentPage, navigateTo, isAuthenticate
     { page: Page.Committee, label: 'Committee' },
     { page: Page.Events, label: 'Events' },
     { page: Page.Publications, label: 'Publications' },
+    { page: Page.Gallery, label: 'Gallery' },
+    { page: Page.Partners, label: 'Partners' },
     { page: Page.Contact, label: 'Contact' },
   ];
   
@@ -64,7 +66,7 @@ const Header: React.FC<HeaderProps> = ({ currentPage, navigateTo, isAuthenticate
         <div className="container mx-auto flex items-center justify-between h-16 px-6">
           {/* Logo */}
           <a href="#home" onClick={(e) => {e.preventDefault(); navigateTo(Page.Home)}} className="flex items-center space-x-2">
-            <img src="https://dhakacollegeculturalclub.com/logo.png" alt="Dhaka College Cultural Club Logo" className="h-9 w-auto" />
+            <img src="/logo.png" alt="Dhaka College Cultural Club Logo" className="h-9 w-auto" />
           </a>
 
           {/* Desktop Nav */}

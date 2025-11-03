@@ -9,7 +9,7 @@ const GalleryCard: React.FC<{ item: GalleryItem }> = ({ item }) => {
     if (!videoId) return <p>Invalid video URL</p>;
 
     return (
-      <div className="bg-white rounded-xl shadow-subtle overflow-hidden">
+      <div className="bg-white rounded-xl overflow-hidden border-2 border-dc-dark shadow-neo transition-all duration-300 hover:-translate-y-1 hover:-translate-x-1 hover:shadow-[6px_6px_0px_#111827]">
         <div className="aspect-w-16 aspect-h-9">
            <iframe 
                 src={`https://www.youtube.com/embed/${videoId}`}
@@ -29,7 +29,7 @@ const GalleryCard: React.FC<{ item: GalleryItem }> = ({ item }) => {
   }
 
   return (
-    <div className="bg-white rounded-xl shadow-subtle overflow-hidden group">
+    <div className="bg-white rounded-xl overflow-hidden group border-2 border-dc-dark shadow-neo transition-all duration-300 hover:-translate-y-1 hover:-translate-x-1 hover:shadow-[6px_6px_0px_#111827]">
       <img src={item.url} alt={item.title} loading="lazy" className="w-full h-64 object-cover transition-transform duration-300 group-hover:scale-105" />
       <div className="p-4">
         <h3 className="font-bold text-dc-dark">{item.title}</h3>

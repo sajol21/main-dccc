@@ -139,7 +139,7 @@ const HomePage: React.FC<{ navigateTo: (page: Page) => void }> = ({ navigateTo }
         ) : (
           <p className="text-center text-dc-text">No upcoming events scheduled. Please check back soon!</p>
         )}
-      </section>
+      </Section>
 
       {/* 4. Team Preview */}
       <Section className="scroll-animate opacity-0 bg-dc-light">
@@ -160,7 +160,7 @@ const HomePage: React.FC<{ navigateTo: (page: Page) => void }> = ({ navigateTo }
                 Meet the Full Team
             </a>
         </div>
-      </section>
+      </Section>
     </div>
   );
 };

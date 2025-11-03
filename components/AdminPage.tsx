@@ -5,8 +5,10 @@ import ManageCommittee from './admin/ManageCommittee';
 import ViewMessages from './admin/ViewMessages';
 import ManageAdvisors from './admin/ManageAdvisors';
 import ManagePublications from './admin/ManagePublications';
+import ManageGallery from './admin/ManageGallery';
+import ManagePartners from './admin/ManagePartners';
 
-type AdminView = 'dashboard' | 'events' | 'committee' | 'messages' | 'advisors' | 'publications';
+type AdminView = 'dashboard' | 'events' | 'committee' | 'messages' | 'advisors' | 'publications' | 'gallery' | 'partners';
 
 const AdminPage: React.FC<{ user: User }> = ({ user }) => {
     const [view, setView] = useState<AdminView>('dashboard');
@@ -38,6 +40,10 @@ const AdminPage: React.FC<{ user: User }> = ({ user }) => {
                 return <ManageAdvisors />;
             case 'publications':
                 return <ManagePublications />;
+            case 'gallery':
+                return <ManageGallery />;
+            case 'partners':
+                return <ManagePartners />;
             case 'messages':
                 return <ViewMessages />;
             case 'dashboard':
@@ -75,6 +81,12 @@ const AdminPage: React.FC<{ user: User }> = ({ user }) => {
                             </NavItem>
                              <NavItem currentView={view} targetView="publications" setView={setView} icon={<svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6.253v11.494m-9-5.747h18" /></svg>}>
                                 Manage Publications
+                            </NavItem>
+                            <NavItem currentView={view} targetView="gallery" setView={setView} icon={<svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" /></svg>}>
+                                Manage Gallery
+                            </NavItem>
+                            <NavItem currentView={view} targetView="partners" setView={setView} icon={<svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M15 21v-1a6 6 0 00-5.176-5.973" /></svg>}>
+                                Manage Partners
                             </NavItem>
                             <NavItem currentView={view} targetView="messages" setView={setView} icon={<svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" /></svg>}>
                                 View Messages

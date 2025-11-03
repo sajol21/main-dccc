@@ -25,7 +25,7 @@ const PublicationModal: React.FC<{ pub: Publication, onClose: () => void }> = ({
 };
 
 const PublicationCard: React.FC<{ pub: Publication, onReadMore: (pub: Publication) => void }> = ({ pub, onReadMore }) => (
-    <div className="bg-white rounded-xl flex flex-col group transition-all duration-300 hover:shadow-medium hover:-translate-y-2 overflow-hidden shadow-subtle">
+    <div className="bg-white rounded-xl flex flex-col group transition-all duration-300 overflow-hidden border-2 border-dc-dark shadow-neo hover:-translate-y-1 hover:-translate-x-1 hover:shadow-[6px_6px_0px_#111827]">
         <div className="overflow-hidden">
             <img src={pub.imageUrl} alt={pub.title} loading="lazy" className="w-full h-56 object-cover transition-transform duration-500 group-hover:scale-105" />
         </div>

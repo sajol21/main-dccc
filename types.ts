@@ -4,6 +4,8 @@ export enum Page {
   Committee = 'committee',
   Events = 'events',
   Publications = 'publications',
+  Gallery = 'gallery',
+  Partners = 'partners',
   Join = 'join',
   Contact = 'contact',
   Login = 'login',

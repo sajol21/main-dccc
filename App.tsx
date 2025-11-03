@@ -6,6 +6,8 @@ import AboutPage from './components/AboutPage';
 import CommitteePage from './components/CommitteePage';
 import EventsPage from './components/EventsPage';
 import PublicationsPage from './components/PublicationsPage';
+import GalleryPage from './components/GalleryPage';
+import PartnersPage from './components/PartnersPage';
 import JoinUsPage from './components/JoinUsPage';
 import ContactPage from './components/ContactPage';
 import LoginPage from './components/LoginPage';
@@ -86,6 +88,10 @@ const App: React.FC = () => {
         return <EventsPage user={currentUser} navigateTo={navigateTo} />;
       case Page.Publications:
         return <PublicationsPage />;
+      case Page.Gallery:
+        return <GalleryPage />;
+      case Page.Partners:
+        return <PartnersPage />;
       case Page.Join:
         return <JoinUsPage navigateTo={navigateTo} />;
       case Page.Contact:
